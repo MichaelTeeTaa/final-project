@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+<div class="container">
+<% if (add || player) { %>
+    <form method="post" action="/<%=add ? 'add' : `edit/${player.id}`%>">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="first-name">Type of food</label>
+                <input type="text" class="form-control" name="what_food" value="<%=add ? '' : player.first_name%>" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="last-name">Name of Food</label>
+                <input type="text" class="form-control" name="food_name" value="<%=add ? '' : player.last_name%>" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="number">Price</label>
+                <input type="number" class="form-control" name="price" value="<%=add ? '' : player.number%>" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="position">Aisle</label>
+                <select name="aisle" class="form-control" required>
+                <% if (!add) { %>
+                    <option selected><%= player.position %></option>
+                <% } %>
+                    <option>A1</option>
+                    <option>A2</option>
+                    <option>A3</option>
+                    <option>A4</option>
+                </select>
+            </div>
+                  <div class="form-group col-md-6">
+                <label for="member">Are you a Ta Grocery Member?</label>
+                <select name="member" class="form-control" required>
+                <% if (!add) { %>
+                    <option selected><%= player.member %></option>
+                <% } %>
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </div>
+        
+        </div>
+        <button type="submit" class="btn btn-success float-right"><%= add ? 'Add' : 'Update' %> Food</button>
+    </form>
+<% } else { %>
+    <p class="text-center">No Food Yet.</p>
+<% } %>
+</div>
+</div>
+</body>
+</html>
